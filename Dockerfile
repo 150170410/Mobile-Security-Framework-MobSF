@@ -100,9 +100,10 @@ WORKDIR /tmp
 RUN git clone https://github.com/rednaga/APKiD.git && \
     cd APKiD && \
     python3 prep-release.py && \
-    cp apkid/rules/rules.yarc /root/Mobile-Security-Framework-MobSF/MobSF/ && \
+    cp apkid/rules/rules.yarc /root/Mobile-Security-Framework-MobSF/ && \
     cd .. && \
     rm -fr APKiD && \
+    chmod +x /root/Mobile-Security-Framework-MobSF/scripts/update_rules.sh; sync && \
     /root/Mobile-Security-Framework-MobSF/scripts/update_rules.sh 
 
 #Cleanup
