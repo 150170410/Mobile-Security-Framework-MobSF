@@ -95,6 +95,16 @@ RUN git clone --recursive ${YARA_URL} yara-python && \
 #Add apktool working path
 RUN mkdir -p /root/.local/share/apktool/framework
 
+#update apkid rules
+WORKDIR /tmp
+RUN git clone https://github.com/rednaga/APKiD.git && \
+    cd APKiD && \
+    python3 prep-release.py && \
+    cp apkid/rules/rules.yarc /root/Mobile-Security-Framework-MobSF/MobSF/ && \
+    cd .. && \
+    rm -fr APKiD && \
+    /root/Mobile-Security-Framework-MobSF/scripts/update_rules.sh 
+
 #Cleanup
 RUN \
     apt remove -y git && \
